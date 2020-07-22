@@ -11,9 +11,7 @@ app.use("/api/user", require("./routes/api/user"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/habit", require("./routes/api/habit"));
 app.use("/api/history", require("./routes/api/history"));
-app.get("/", (req, res) => {
-  res.send("Welcome to Home");
-});
+
 // cron.schedule("*/2 * * * *", async function () {
 //   await Habit.updateMany(
 //     { todayChecked: true },
@@ -35,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   connectDB();
   console.log("server successfully started on port 5000");
 });
