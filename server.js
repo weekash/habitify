@@ -4,7 +4,7 @@ const app = express();
 const cron = require("node-cron");
 const connectDB = require("./db");
 const Habit = require("./models/habit");
-const path = path();
+const path = require("path");
 dotenv.config();
 app.use(express.json({ extended: true }));
 app.use("/api/user", require("./routes/api/user"));
