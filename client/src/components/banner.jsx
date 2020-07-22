@@ -85,7 +85,7 @@ const Banner = () => {
           Built with
           <i className="fab fa-react"></i>
         </h1>
-        <a href="">
+        <a href="https://github.com/weekash/habitify">
           <button className="btn">
             <i className="fab fa-github"></i>Source Code on Github
           </button>
