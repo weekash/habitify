@@ -12,16 +12,19 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/habit", require("./routes/api/habit"));
 app.use("/api/history", require("./routes/api/history"));
 
-// cron.schedule("*/2 * * * *", async function () {
-//   await Habit.updateMany(
-//     { todayChecked: true },
-//     { $set: { todayChecked: false }, $inc: { pass: 1 } }
-//   );
-//   await Habit.updateMany(
-//     { todayChecked: false },
-//     { $set: { todayChecked: false }, $inc: { fail: 1 } }
-//   );
-// });
+cron.schedule("00 00 00 * * *", async function () {
+  await Habit.updateMany(
+    { todayChecked: true, isCompleted: false },
+    { $inc: { pass: 1 } }
+  );
+  let failed = await Habit.updateMany(
+    { todayChecked: false, isCompleted: false },
+    { $inc: { fail: 1 } }
+  );
+  console.log({ failed });
+  await Habit.updateMany({ isCompleted: false }, { todayChecked: false });
+  await Habit.deleteMany({ fail: { $gt: 5 } });
+});
 
 //server static assets
 

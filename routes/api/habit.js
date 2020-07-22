@@ -180,10 +180,11 @@ router.post(
   }
 );
 
+//delete a habit by id
 router.delete("/delete/:id", auth, async (req, res) => {
   try {
     const habit = await Habit.findOne({ _id: req.params.id });
-
+    console.log(habit);
     if (!habit) {
       res.status(404).send({ errors: [{ msg: "Habit doesn't exist" }] });
     }

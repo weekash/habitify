@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { checkHabit, getUncheckedHabits } from "../actions/habit";
+import { checkHabit, getAllHabits } from "../actions/habit";
 import { connect } from "react-redux";
 import Loader from "./loader/loader";
 import Alert from "./alert";
 import Moment from "react-moment";
 import PopupForm from "./popupForm";
 import Nothing from "./nothing";
-const Tasks = ({ getUncheckedHabits, checkHabit, loading, habits }) => {
+const Tasks = ({ getAllHabits, checkHabit, loading, habits }) => {
   const [state, setState] = useState({
     popup: false,
     id: null,
@@ -15,7 +15,7 @@ const Tasks = ({ getUncheckedHabits, checkHabit, loading, habits }) => {
   });
 
   useEffect(() => {
-    getUncheckedHabits();
+    getAllHabits();
     setState({
       ...state,
       checked:
@@ -29,7 +29,7 @@ const Tasks = ({ getUncheckedHabits, checkHabit, loading, habits }) => {
               (item) => item.todayChecked != true && item.fail <= 3
             ),
     });
-  }, [getUncheckedHabits, loading]);
+  }, [getAllHabits, loading]);
   const closePopup = () => {
     setState({ ...state, popup: false });
   };
@@ -113,6 +113,4 @@ const mapStateToProps = (state) => ({
   loading: state.habit.loading,
 });
 
-export default connect(mapStateToProps, { getUncheckedHabits, checkHabit })(
-  Tasks
-);
+export default connect(mapStateToProps, { getAllHabits, checkHabit })(Tasks);

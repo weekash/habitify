@@ -461,10 +461,10 @@ a {
   bottom: 0px;
   left: 0;
 }
-.card ::-webkit-progress-bar {
+progress::-webkit-progress-bar {
   background-color: var(--lightblue);
 }
-.card ::-webkit-progress-value {
+progress::-webkit-progress-value {
   background: var(--main-gradient);
 }
 .card div:nth-child(3) {

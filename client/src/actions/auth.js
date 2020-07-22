@@ -15,7 +15,6 @@ import { setAlert } from "../actions/alert";
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
-    console.log("hi");
   }
   try {
     const res = await axios.get("/api/auth/");
@@ -30,10 +29,9 @@ export const loadUser = () => async (dispatch) => {
 };
 
 export const getUserById = (id) => async (dispatch) => {
-  console.log("id:" + id);
   try {
     const res = await axios.get(`/api/user/${id}`);
-    console.log(res);
+
     dispatch({ type: GET_USER_BY_ID, payload: res.data });
   } catch (err) {
     dispatch({ type: GET_USER_BY_ID_FAIL });
@@ -49,7 +47,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
   try {
     const res = await axios.post("/api/auth", body, config);
-    console.log(res);
+
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     dispatch(loadUser());
     dispatch(setAlert("Logged In Successfully", "success"));

@@ -53,7 +53,7 @@ const AllHabits = ({
       {state.incomplete.length ? (
         <div className="habit-category">
           {state.incomplete.map((item) => {
-            return <HabitCard data={item} />;
+            return <HabitCard data={item} key={item._id} />;
           })}
         </div>
       ) : (
@@ -67,7 +67,7 @@ const AllHabits = ({
             {state.complete.map(
               ({ _id, reward, name, lastChecked, rewarded, duration }) => {
                 return (
-                  <div className="complete-card">
+                  <div className="complete-card" key={_id}>
                     <i className="fas fa-trophy"></i>
                     <div>
                       <h1>{name}</h1>
@@ -131,7 +131,7 @@ const AllHabits = ({
           <div id="disabled">
             {state.disabled.map(({ name, _id, fail }) => {
               return (
-                <div className="disabled-card">
+                <div className="disabled-card" key={_id}>
                   <h1>{name}</h1>
                   <h2>Fails : {fail}</h2>
                   <p>
