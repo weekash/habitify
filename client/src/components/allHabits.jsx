@@ -23,6 +23,9 @@ const AllHabits = ({
     id: null,
   });
 
+  const closeReward = () => {
+    setState({ ...state, rewardPopup: false });
+  };
   useEffect(() => {
     getAllHabits();
     setState({
@@ -41,9 +44,7 @@ const AllHabits = ({
         loading || !habits ? [] : habits.filter((item) => item.fail > 3),
     });
   }, [loading, addReward, getAllHabits, deleteHabit]);
-  const closeReward = () => {
-    setState({ ...state, rewardPopup: false });
-  };
+
   if (loading) return <Loader />;
   return !habits.length ? (
     <Nothing message="There are no habits in collection . Add one now. " />
