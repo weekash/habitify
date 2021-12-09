@@ -17,18 +17,9 @@ const HabitSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  todayChecked: {
-    type: Boolean,
-    default: false,
-  },
-  pass: {
-    type: Number,
-    default: 0,
-  },
-  fail: {
-    type: Number,
-    default: 0,
-  },
+  progress :[{
+    type:String,
+  }],
   isCompleted: {
     type: Boolean,
     default: false,

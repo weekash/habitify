@@ -7,6 +7,10 @@ import Nothing from "./nothing";
 import Moment from "react-moment";
 import Reward from "./reward";
 import habit from "../reducers/habit";
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { FacebookIcon, TwitterIcon, WhatsappIcon } from "react-share";
+
+
 const AllHabits = ({
   getAllHabits,
   habits,
@@ -38,10 +42,8 @@ const AllHabits = ({
         loading || !habits
           ? []
           : habits.filter(
-              (item) => item.isCompleted !== true && item.fail <= 3
-            ),
-      disabled:
-        loading || !habits ? [] : habits.filter((item) => item.fail > 3),
+            (item) => item.isCompleted !== true
+          )
     });
   }, [loading, addReward, getAllHabits, deleteHabit]);
 
@@ -93,21 +95,30 @@ const AllHabits = ({
                         </button>
                       ) : (
                         <div id="share-btns">
-                          <a href="">
-                            <i className="fab fa-whatsapp"></i>
-                          </a>
-                          {/* <a
-                            href={`https://twitter.com/intent/tweet?&text=Hi+guys+do+check+my+progress+on+Habitify&url=${`http://localhost:3000/share/${user}/${duration}/${name}/${reward}`}&hashtags=habit%2Chabitbuilder%2Chabitify%2Cdailycheckout%2C`}
+                          <FacebookShareButton
+                            url={`http://localhost:3000/share/${_id}`}
+                            quote={`Hi guys I got a reward on habitify. Check this `}
                           >
-                            <i className="fab fa-twitter"></i>
-                          </a> */}
-                          <a href="">
-                            <i className="fab fa-twitter"></i>
-                          </a>
-                          <a href="">
-                            <i className="fab fa-facebook"></i>
-                          </a>
+                            <FacebookIcon size={26} round />
+                          </FacebookShareButton>
+
+                          <WhatsappShareButton
+                          className="ml_8"
+                            url={`http://localhost:3000/share/${_id}`}
+                            title={`Hi guys I got a reward on habitify. Check this `}
+                          >
+                            <WhatsappIcon size={26} round />
+                          </WhatsappShareButton>
+                          <TwitterShareButton
+                          className="ml_8"
+                            url={`http://localhost:3000/share/${_id}`}
+                            title={`Hi guys I got a reward on habitify. Check this `}
+                          >
+                            <TwitterIcon size={26} round />
+                          </TwitterShareButton>
+
                         </div>
+
                       )}
                       {state.rewardPopup ? (
                         <Reward
@@ -126,29 +137,7 @@ const AllHabits = ({
         </>
       ) : null}
 
-      {state.disabled.length ? (
-        <>
-          <h1>Habits Disabled</h1>
-          <div id="disabled">
-            {state.disabled.map(({ name, _id, fail }) => {
-              return (
-                <div className="disabled-card" key={_id}>
-                  <h1>{name}</h1>
-                  <h2>Fails : {fail}</h2>
-                  <p>
-                    Can't continue , you failed more than 3 times. Better to
-                    delete this and recreate.
-                  </p>
 
-                  <button className="btn" onClick={() => deleteHabit(_id)}>
-                    Delete
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      ) : null}
     </div>
   );
 };

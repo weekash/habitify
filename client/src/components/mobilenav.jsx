@@ -1,22 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const MobileNav = () => {
   return (
     <div id="mobile">
-      <a href="/">
+      <Link to="/">
         <i className="fas fa-home"></i>
-      </a>
-      <a href="/dashboard/habits">
+      </Link>
+      <Link to="/dashboard/habits">
         <i className="fas fa-running"></i>
-      </a>
-      <a href="/dashboard/addhabit">
+      </Link>
+      <Link to="/dashboard/addhabit">
         <i className="fas fa-plus"></i>
-      </a>
-      <a href="/dashboard">
+      </Link>
+      <Link to="/dashboard">
         <i className="fas fa-tasks"></i>
-      </a>
-      <a href="/dashboard/history">
+      </Link>
+      <Link to="/dashboard/history">
         <i className="fas fa-user"></i>
-      </a>
+      </Link>
     </div>
   );
 };

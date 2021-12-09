@@ -16,17 +16,17 @@ import SharePage from "./components/sharepage";
 function App() {
   useEffect(() => {
     store.dispatch(loadUser());
-    let elements = document.getElementsByTagName("input");
-    let mobilenav = document.getElementById("mobile");
-    console.log(elements);
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].addEventListener("focus", () => {
-        mobilenav.style.display = "none";
-      });
-      elements[i].addEventListener("blur", () => {
-        mobilenav.style.display = "flex";
-      });
-    }
+    // let elements = document.getElementsByTagName("input");
+    // let mobilenav = document.getElementById("mobile");
+    // console.log(elements);
+    // for (let i = 0; i < elements.length; i++) {
+    //   elements[i].addEventListener("focus", () => {
+    //     mobilenav.style.display = "none";
+    //   });
+    //   elements[i].addEventListener("blur", () => {
+    //     mobilenav.style.display = "flex";
+    //   });
+    // }
   }, []);
   return (
     <Router>

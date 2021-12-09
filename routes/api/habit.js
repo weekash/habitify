@@ -135,9 +135,11 @@ router.post(
 router.post(
   "/check/:id",
   auth,
-  [check("message", "Please enter a message").notEmpty()],
+  [check("message", "Please enter a message").notEmpty(),
+  check("checkInDate", "Checkin Date should be specified").notEmpty()
+],
   async (req, res) => {
-    const { message } = req.body;
+    const { message, checkInDate } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -155,10 +157,8 @@ router.post(
       }
       if (!habit.todayChecked && !habit.isCompleted) {
         await habit.updateOne({
-          todayChecked: true,
-          message: message,
-          pass: habit.pass + 1,
-          isCompleted: habit.pass + 1 == habit.duration ? true : false,
+          progress:[...habit.progress, checkInDate],
+          isCompleted: habit.progress.length == habit.duration ? true : false,
           lastUpdated: Date.now(),
         });
 

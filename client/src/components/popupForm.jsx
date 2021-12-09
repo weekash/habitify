@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 
 const PopupForm = ({ id, checkHabit, closePopup }) => {
   const [state, setState] = useState({
@@ -8,12 +9,14 @@ const PopupForm = ({ id, checkHabit, closePopup }) => {
   const handleText = (e) => {
     setState({ [e.target.name]: e.target.value });
   };
+  const today =  moment(moment.now()).format('DD/MM/YYYY');
 
   return (
     <div className="popup">
-      <form className="form" onSubmit={() => checkHabit(id, state.message)}>
+      <form className="form" onSubmit={() => checkHabit(id, state.message, today)}>
         <label>How's you feel after completing this task?</label>
         <input
+          autoFocus
           type="text"
           name="message"
           value={state.message}
@@ -21,20 +24,20 @@ const PopupForm = ({ id, checkHabit, closePopup }) => {
           required
         />
         <div>
-          <span onClick={() => setState({ message: "It was boring" })}>
-            It was boring
+          <span onClick={() => setState({ message: "boring" })}>
+            boring
           </span>
-          <span onClick={() => setState({ message: "It was fine" })}>
-            It was fine
+          <span onClick={() => setState({ message: "fine" })}>
+            fine
           </span>
-          <span onClick={() => setState({ message: "Totally Exciting" })}>
-            Totally Exciting
+          <span onClick={() => setState({ message: "fine" })}>
+            good
           </span>
-          <span onClick={() => setState({ message: "I'm tired" })}>
-            I'm tired
+          <span onClick={() => setState({ message: "exciting" })}>
+            exciting
           </span>
-          <span onClick={() => setState({ message: "I enjoyed" })}>
-            I enjoyed
+          <span onClick={() => setState({ message: "tiring" })}>
+            tiring
           </span>
         </div>
         <button className="btn" type="submit">

@@ -1,6 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
-const HabitCard = ({ data: { name, duration, pass, fail, dateCreated } }) => {
+const HabitCard = ({ data: { name, duration, progress, dateCreated } }) => {
   return (
     <div className="card">
       <div className="card-top">
@@ -10,19 +10,22 @@ const HabitCard = ({ data: { name, duration, pass, fail, dateCreated } }) => {
           <p>Duration : {duration} days</p>
         </div>
       </div>
-      <progress max={duration} value={pass}></progress>
+
       <p>
         Created : <Moment fromNow>{dateCreated}</Moment>
       </p>
-      <div className="progress-info">
-        <span>Checks: {pass} </span>
-        <span>Fails : {fail} </span>
-      </div>
+    
       <div className="card-bottom">
-        <span>{duration - pass} days remaining</span>
+        <span>{duration - progress.length} days remaining</span>
         <span>
-          {pass}/{duration} days
+          {progress.length}/{duration} days
         </span>
+      </div>
+      <div className="progress-bar">
+        <div
+          className="progress-value"
+          style={{ width: `${progress.length / duration * 100}%`}}
+        ></div>
       </div>
     </div>
   );

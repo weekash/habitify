@@ -4,6 +4,10 @@ import { getUserById } from "../actions/auth";
 import { connect } from "react-redux";
 import Loader from "./loader/loader";
 import Nothing from "./nothing";
+
+function captialize(str) {
+  return str.slice(0,1).toUpperCase() + str.slice(1, str.length);
+}
 const SharePage = ({
   user,
   getHabitAndUserById,
@@ -20,7 +24,7 @@ const SharePage = ({
   });
   useEffect(() => {
     let id = match.params.id;
-    getHabitAndUserById(id);
+    id && getHabitAndUserById(id);
 
     setState({
       ...state,
@@ -33,6 +37,7 @@ const SharePage = ({
 
   const { name, habit, reward, duration } = state;
   if (habitloading || authloading) return <Loader />;
+  
   if (!habit)
     return (
       <Nothing message="Page for which you are looking is not available" />
@@ -41,12 +46,12 @@ const SharePage = ({
   return (
     <div id="share-page">
       <div id="share-box">
-        <img src="/celebration.jpg" />
+        <img src="/award.jpg" />
         <div>
           <h1>
-            <b>{name}</b> has successfullly completed his practice for the habit
-            <b> {habit} </b> in just <b>{duration}</b> days. Also he won
-            <b>{reward}</b> credits.
+            <b> {captialize(name)} </b> has successfullly completed his practice for the habit
+            <b> " {habit} " </b> in just <b> {duration} </b> days. Also he won
+            <b> {reward} </b> credits.
           </h1>
           <p>
             If you are also interested in this product click on button below

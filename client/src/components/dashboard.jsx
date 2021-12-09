@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 import Loader from "../components/loader/loader";
-import { Switch } from "react-router-dom";
+import { Switch, Link } from "react-router-dom";
 import HabitForm from "./habitForm";
 import PrivateRoute from "./privateRoute";
 import AllHabits from "./allHabits";
@@ -25,13 +25,13 @@ const Dashboard = ({ logout, isAuthenticated, loading, user }) => {
       <div id="left-menu">
         <img src="/user.png" />
         <h3>Welcome {state.name} </h3>
-        <a href="/dashboard/addhabit">
-          <button className="btn"> + Add a habit</button>
-        </a>
-        <a href="/dashboard">CheckIn</a>
-        <a href="/dashboard/habits">My Habits</a>
-        <a href="/dashboard/history">My Progress</a>
-        <a href="">Rewards</a>
+        <Link to="/dashboard/addhabit">
+          <button className="btn"> + Add habit</button>
+        </Link>
+        <Link to="/dashboard">CheckIn</Link>
+        <Link to="/dashboard/habits">My Habits</Link>
+        <Link to="/dashboard/history">My Progress</Link>
+        <Link to="">Rewards</Link>
         <button className="btn" onClick={logout}>
           Logout
         </button>

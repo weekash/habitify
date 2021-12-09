@@ -6,29 +6,36 @@ import Alert from "./alert";
 import Moment from "react-moment";
 import PopupForm from "./popupForm";
 import Nothing from "./nothing";
+import moment from "moment";
 const Tasks = ({ getAllHabits, checkHabit, loading, habits }) => {
   const [state, setState] = useState({
     popup: false,
     id: null,
-    checked: [],
+    checked: [],  
     unchecked: [],
   });
 
+  const today =  moment(moment.now()).format('DD/MM/YYYY');
+
+  function sortHabits(habits) {
+    console.log(today)
+    const checked=[], unchecked=[];
+    habits.map((habit)=>{
+      console.log({P: habit.progress})
+      if(habit.progress.includes(today))
+      checked.push(habit);
+      else
+      unchecked.push(habit)
+    })
+
+    setState({...state, checked, unchecked})
+  
+  }
+
   useEffect(() => {
     getAllHabits();
-    setState({
-      ...state,
-      checked:
-        loading && !habits
-          ? []
-          : habits.filter((item) => item.todayChecked != false),
-      unchecked:
-        loading && !habits
-          ? []
-          : habits.filter(
-              (item) => item.todayChecked != true && item.fail <= 3
-            ),
-    });
+    !loading && habits && sortHabits(habits)
+   
   }, [getAllHabits, loading]);
   const closePopup = () => {
     setState({ ...state, popup: false });
@@ -81,12 +88,12 @@ const Tasks = ({ getAllHabits, checkHabit, loading, habits }) => {
 
       {state.checked.length ? (
         <div className="tasks">
-          {state.checked.map(({ name, _id, todayChecked, lastUpdated }) => {
+          {state.checked.map(({ name, _id,lastUpdated }) => {
             return (
               <div
                 className="checked-card"
                 key={_id}
-                onSubmit={() => checkHabit(_id, state.message)}
+                onSubmit={() => checkHabit(_id, state.message, today)}
               >
                 <i className="fas fa-check-circle"></i>
                 <div>

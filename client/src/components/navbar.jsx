@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 const Navbar = ({ isAuthenticated, user, loading }) => {
   const [state, setState] = useState({
     reward: 0,
@@ -11,23 +12,23 @@ const Navbar = ({ isAuthenticated, user, loading }) => {
     <>
       <div id="navbar">
         <h1>
-          <a href="/" className="text-gradient">
+          <Link to="/" className="text-gradient">
             Habitify{" "}
-          </a>
+          </Link>
         </h1>
         <div>
           <ul className="remove-in-mobile">
             <li>
               {!isAuthenticated ? (
-                <a href="/login">Login</a>
+                <Link to="/login">Login</Link>
               ) : (
-                <a href="/dashboard">
+                <Link to="/dashboard">
                   <img src="/user.png" />
-                </a>
+                </Link>
               )}
             </li>
             <li>
-              <a href="/#features">About</a>
+              <Link to="/#features">About</Link>
             </li>
           </ul>
 

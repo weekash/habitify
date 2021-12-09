@@ -32,6 +32,9 @@ a {
   text-decoration: none;
   color: var(--grey);
 }
+.ml_8{
+  margin-left: 8px;
+}
 
 .btn {
   outline: none;
@@ -179,7 +182,7 @@ a {
 }
 .feature h1 {
   font-size: var(--l);
-  color: var(--red);
+  color: var(--grey);
 }
 .feature p {
   font-size: var(--m);
@@ -403,9 +406,6 @@ a {
   background-color: var(--white);
   border: 2px solid var(--lightblue);
   padding: 5px;
-  position: relative;
-  /* border-top-left-radius: 15px;
-  border-top-right-radius: 15px; */
   border-radius: 10px;
   overflow: hidden;
 }
@@ -453,18 +453,14 @@ a {
 .progress-info span:nth-child(2) {
   color: var(--red);
 }
-.card progress {
-  border: none;
-  width: 100%;
+.progress-bar {
   height: 15px;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
+  background: var(--lightblue);
+  margin: -5px;
 }
-progress::-webkit-progress-bar {
-  background-color: var(--lightblue);
-}
-progress::-webkit-progress-value {
+.progress-value {
+  min-width: 0px;
+  height: 15px;
   background: var(--main-gradient);
 }
 .card div:nth-child(3) {
@@ -491,11 +487,8 @@ progress::-webkit-progress-value {
 } */
 .card-bottom {
   width: 100%;
-  padding: 0 10px;
-
-  position: absolute;
-  bottom: 20px;
-  left: 0;
+  padding: 0 5px;
+  margin: 10px 0;
   display: flex;
   justify-content: space-between;
   font-size: var(--xs);
@@ -656,19 +649,15 @@ progress::-webkit-progress-value {
   color: var(--green);
   margin-top: 5px;
 }
-.complete-card button {
+/* .complete-card button {
   padding: 5px;
   background-color: var(--purple);
   color: var(--white);
   margin-top: 5px;
   font-size: var(--s);
-}
-#share-btns i {
-  font-size: 25px;
-  text-align: center;
-  line-height: 40px;
-  color: var(--black);
-  margin: 0 5px;
+} */
+#share-btns{
+  margin:5px 0;
 }
 
 #disabled {
@@ -816,6 +805,8 @@ progress::-webkit-progress-value {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background: url('./celebration-bg.jpg') no-repeat;
+  background-size: cover;
 }
 #share-box {
   width: 100%;
@@ -825,9 +816,10 @@ progress::-webkit-progress-value {
   border-radius: 20px;
   box-shadow: 0 0 10px #cfcfcf;
   padding: 15px;
+  background-color: #ffffff;
 }
 #share-box img {
-  width: 100%;
+  width: 70%;
   object-fit: cover;
   height: auto;
   border-radius: 20px;
@@ -943,9 +935,10 @@ progress::-webkit-progress-value {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--lightblue);
+    background: var(--main-gradient);
     padding: 15px;
     min-height: 200px;
+    filter: saturate(80%);
   }
 
   #mobile-board img {
@@ -953,11 +946,11 @@ progress::-webkit-progress-value {
     height: 80px;
     border-radius: 100%;
     padding: 5px;
-    border: 2px solid var(--grey);
+    border: 2px solid var(--white);
     margin: 20px 0;
   }
   #mobile-board h1 {
-    color: var(--purple);
+    color: var(--white);
     font-size: var(--xl);
   }
   #mobile-board button {

@@ -39,8 +39,8 @@ export const getHabitAndUserById = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/habit/${id}`);
 
-    dispatch(getUserById(res.data.user));
-    dispatch({ type: GET_HABIT_BY_ID, payload: res.data });
+    await dispatch(getUserById(res.data.user));
+    await dispatch({ type: GET_HABIT_BY_ID, payload: res.data });
   } catch (err) {
     console.log(err.response);
     dispatch({ type: GET_HABIT_BY_ID_FAIL });
@@ -66,16 +66,16 @@ export const addHabit = (name, duration) => async (dispatch) => {
   }
 };
 
-export const checkHabit = (id, message) => async (dispatch) => {
-  message = `You said "${message}" `;
+export const checkHabit = (id, message, checkInDate) => async (dispatch) => {
+  message = `You have checked in and your experience was "${message}"`;
   try {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const body = JSON.stringify({ message });
-    axios.post(`/api/habit/check/${id}`, body, config);
+    const body = JSON.stringify({ message, checkInDate });
+    await axios.post(`/api/habit/check/${id}`, body, config);
     dispatch({ type: CHECK_IN_SUCCESS });
     dispatch(setAlert("Great !!! Keep going", "success"));
   } catch (err) {
@@ -84,6 +84,13 @@ export const checkHabit = (id, message) => async (dispatch) => {
   }
 };
 
+const setStorage = (id) => {
+  localStorage.setItem("done", id);
+  setTimeout(remove(), 5000);
+};
+const remove = () => {
+  localStorage.removeItem("done");
+};
 export const addReward = (id, reward) => async (dispatch) => {
   try {
     const config = {
