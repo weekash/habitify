@@ -17,7 +17,9 @@ const AllHabits = ({
   loading,
   addReward,
   deleteHabit,
+  history
 }) => {
+  console.log({history})
   const [state, setState] = useState({
     complete: [],
     incomplete: [],
@@ -96,7 +98,7 @@ const AllHabits = ({
                       ) : (
                         <div id="share-btns">
                           <FacebookShareButton
-                            url={`http://localhost:3000/share/${_id}`}
+                            url={`${process.env.REACT_APP_URL}/${_id}`}
                             quote={`Hi guys I got a reward on habitify. Check this `}
                           >
                             <FacebookIcon size={26} round />
@@ -104,14 +106,14 @@ const AllHabits = ({
 
                           <WhatsappShareButton
                           className="ml_8"
-                            url={`http://localhost:3000/share/${_id}`}
+                            url={`${process.env.REACT_APP_URL}/${_id}`}
                             title={`Hi guys I got a reward on habitify. Check this `}
                           >
                             <WhatsappIcon size={26} round />
                           </WhatsappShareButton>
                           <TwitterShareButton
                           className="ml_8"
-                            url={`http://localhost:3000/share/${_id}`}
+                            url={`${process.env.REACT_APP_URL}/${_id}`}
                             title={`Hi guys I got a reward on habitify. Check this `}
                           >
                             <TwitterIcon size={26} round />
