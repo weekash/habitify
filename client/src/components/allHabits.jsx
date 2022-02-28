@@ -122,14 +122,14 @@ const AllHabits = ({
                         </div>
 
                       )}
-                      {state.rewardPopup ? (
+                      {state.rewardPopup && 
                         <Reward
                           id={state.id}
                           reward={reward}
                           addReward={addReward}
                           closeReward={closeReward}
                         />
-                      ) : null}
+                  }
                     </div>
                   </div>
                 );
